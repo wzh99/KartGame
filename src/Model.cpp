@@ -9,6 +9,7 @@ Model::Model(const std::string &path) : dir(path.substr(0, path.find_last_of('/'
     if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) 
         Error("Assimp error: %s", importer.GetErrorString());
     processNode(scene->mRootNode, scene); // process node recursively, beginning at root
+    loadedTex.clear();
 }
 
 void Model::Draw(Program &prog, const glm::mat4 &model) {

@@ -2,10 +2,11 @@
 
 ## Functionality
 
-* Read mesh from OBJ file
-* Render with Phong lighting model
-* Manipulate mesh with mouse
-* Translucent effect by OIT
+* Model rendering with texture mapping
+* Shadow mapping
+* Cubemap for skybox rendering and reflection effect
+* Kinematically-based driving control
+* Three different views: spectator, driver, back
 
 See [lab report](doc/report.md) for details.
 
@@ -22,3 +23,11 @@ See [lab report](doc/report.md) for details.
 * Assimp 5.0
 
 ## Demo
+
+![](doc/spectator.png)
+
+![](doc/driver.png)
+
+![](doc/back.png)
+
+![](doc/turn.png)

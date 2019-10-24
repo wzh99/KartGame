@@ -23,6 +23,7 @@ void KartGame::setup() {
     control = std::make_unique<Controller>(window, glm::vec3(6.5, 1, 0), 0);
     car = std::make_unique<Model>("../asset/car/car-n.obj");
     cone = std::make_unique<Model>("../asset/cone/cone2_obj.obj");
+    sky = std::make_unique<Skybox>("../asset/sky/sky_", "png");
     track = std::make_unique<Model>(std::vector<Mesh>{
         CreateTrack(4.f, 9.f, 15.f, 25, 5)
     });
@@ -42,7 +43,6 @@ void KartGame::setup() {
         "../src/shader/track.f.glsl"
     );
     shadow = std::make_unique<ShadowMap>(lightDir);
-    sky = std::make_unique<Skybox>("../asset/sky/sky_", "png");
 
     // Compute cone model matrices
     constexpr auto coneUp = .25f;
@@ -74,14 +74,13 @@ void KartGame::draw() {
     glm::vec3 camPos;
     std::tie(view, camPos) = control->GetView();
     auto proj = glm::perspective(glm::radians(45.f), aspect, .1f, 100.f);
-
     auto setUniform = [&] (Program &prog) {
         prog.Use();
         prog.SetVec3("camPos", camPos);
         prog.SetMat4("view", view);
         prog.SetMat4("proj", proj);
         prog.SetVec3("lightDir", lightDir);
-        shadow->SetMap(prog); // uniforms provided by shadow map
+        shadow->SetMap(prog); // uniforms provided by shadow mapG
     };
 
     // Render all visible targets
